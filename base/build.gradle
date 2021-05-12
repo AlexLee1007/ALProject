@@ -1,0 +1,78 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+
+def androids = rootProject.ext.androids
+def app = rootProject.ext.app
+
+android {
+    compileSdkVersion androids.compileSdkVersion
+    buildToolsVersion androids.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion androids.minSdkVersion
+        targetSdkVersion androids.targetSdkVersion
+        versionCode androids.versionCode
+        versionName androids.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildFeatures {
+        viewBinding = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    def libsImpl = rootProject.ext.dependencies.implementation
+    def libsTestImpl = rootProject.ext.dependencies.testImplementation
+    def libsAndroidTestImpl = rootProject.ext.dependencies.androidTestImplementation
+    def liasAnnotationProcessor = rootProject.ext.dependencies.annotationProcessor
+
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+
+
+    // Kotlin 基础依赖
+    implementation libsImpl.core_ktx
+    implementation libsImpl.kotlin_stdlib
+    implementation libsImpl.kotlin_reflect
+    implementation libsImpl.coroutines_kotlin
+    implementation libsImpl.coroutines_android
+
+    // Androidx基础依赖
+    implementation libsImpl.google_material
+    implementation libsImpl.androidx_appcompat
+    implementation libsImpl.androidx_constraintLayout
+
+    api libsImpl.lifecycle_api
+    api libsImpl.lifecycle_runtime
+    api libsImpl.lifecycle_livedata
+    api libsImpl.lifecycle_common
+    api libsImpl.lifecycle_process
+
+    //第三方依赖库
+    implementation libsImpl.mmkv
+    implementation libsImpl.logger
+
+    testImplementation libsTestImpl.junit
+    androidTestImplementation libsAndroidTestImpl.test_ext
+    androidTestImplementation libsAndroidTestImpl.test_espresso
+
+}

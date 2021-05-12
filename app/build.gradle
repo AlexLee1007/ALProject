@@ -1,0 +1,80 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+def androids = rootProject.ext.androids
+def app = rootProject.ext.app
+
+android {
+    compileSdkVersion androids.compileSdkVersion
+    buildToolsVersion androids.buildToolsVersion
+
+    defaultConfig {
+        applicationId app.applicationId
+        minSdkVersion androids.minSdkVersion
+        targetSdkVersion androids.targetSdkVersion
+        versionCode androids.versionCode
+        versionName androids.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures {
+        viewBinding = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+}
+
+dependencies {
+    def libsImpl = rootProject.ext.dependencies.implementation
+    def libsTestImpl = rootProject.ext.dependencies.testImplementation
+    def libsAndroidTestImpl = rootProject.ext.dependencies.androidTestImplementation
+    def liasAnnotationProcessor = rootProject.ext.dependencies.annotationProcessor
+
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+    implementation project(':base')
+
+    // Kotlin 基础依赖
+    implementation libsImpl.core_ktx
+    implementation libsImpl.kotlin_stdlib
+    implementation libsImpl.kotlin_reflect
+    implementation libsImpl.coroutines_kotlin
+    implementation libsImpl.coroutines_android
+
+    // Androidx基础依赖
+    implementation libsImpl.androidx_appcompat
+    implementation libsImpl.google_material
+    implementation libsImpl.androidx_constraintLayout
+    implementation libsImpl.androidx_recyclerview
+
+    //网络基础依赖
+    implementation libsImpl.retrofit_api
+    implementation libsImpl.retrofit_gson
+    implementation libsImpl.retrofit_rxjava2
+    implementation libsImpl.retrofit_scalars
+    implementation libsImpl.retrofit_logging
+    implementation libsImpl.rxandroid
+
+    //第三方依赖库
+    testImplementation libsTestImpl.junit
+    androidTestImplementation libsAndroidTestImpl.test_ext
+    androidTestImplementation libsAndroidTestImpl.test_espresso
+
+}
