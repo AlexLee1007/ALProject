@@ -3,6 +3,7 @@ package com.alexe.www
 import android.app.Application
 import com.alexe.base.helper.ALog
 import com.alexe.base.helper.AppManager
+import com.alexe.base.helper.HttpHelper
 import com.alexe.base.helper.MmkvUtil
 
 /**
@@ -21,8 +22,9 @@ class App : Application() {
 
     private fun initialize() {
         AppManager.init(mContext)
-        MmkvUtil.init(this)
-        ALog.init(BuildConfig.DEBUG, "ALEX")
+        MmkvUtil.init(mContext)
+        HttpHelper.init(mContext)
+        ALog.init(BuildConfig.DEBUG, "DOGE")
     }
 
     companion object {

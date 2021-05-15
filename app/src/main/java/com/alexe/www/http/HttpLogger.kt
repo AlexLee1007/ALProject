@@ -32,7 +32,7 @@ class HttpLogger : HttpLoggingInterceptor.Logger {
 
     private fun formatJson(json: String): String {
         val sb = StringBuilder()
-        var last = '\u0000'
+        var last: Char?
         var current = '\u0000'
         var indent = 0
         for (i in 0 until json.length) {

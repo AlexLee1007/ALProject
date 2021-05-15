@@ -70,6 +70,7 @@ dependencies {
     //第三方依赖库
     implementation libsImpl.mmkv
     implementation libsImpl.logger
+    api libsImpl.autosize
 
     testImplementation libsTestImpl.junit
     androidTestImplementation libsAndroidTestImpl.test_ext

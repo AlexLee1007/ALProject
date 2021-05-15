@@ -3,7 +3,7 @@ ext {
     androids = [
             buildToolsVersion: "30.0.2",
             compileSdkVersion: 29,
-            minSdkVersion    : 24,
+            minSdkVersion    : 23,
             targetSdkVersion : 27,
             versionCode      : 1,
             versionName      : "1.0.0",
@@ -90,7 +90,7 @@ ext {
                     qr_code                  : "cn.bingoogolapple:bga-qrcode-zxing:${dependVersion.bingoogolapple}",//扫描二维码
                     mmkv                     : "com.tencent:mmkv-static:${dependVersion.mmkv}",//微信储存微量字段的工具库
                     autosize                 : "me.jessyan:autosize:${dependVersion.autosize}",//界面适配
-                    logger                   : "com.orhanobut:logger:${dependVersion.logger}}"
+                    logger                   : "com.orhanobut:logger:${dependVersion.logger}"
             ],
             testImplementation       : [
                     junit: "junit:junit:${dependVersion.junit}",//测试板块组件之一,核心testImplementation,

@@ -46,7 +46,7 @@ object MmkvUtil {
     /**
      * 存储Set列表
      */
-    fun encode(key: String, set: Set<String>) {
+    fun encode(key: String, set: Set<String>?) {
         if (set == null) {
             return
         }

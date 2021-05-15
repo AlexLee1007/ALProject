@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
+import com.alexe.base.helper.ALog
 import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Method
 import java.lang.reflect.ParameterizedType
@@ -34,20 +35,16 @@ abstract class BaseActivity<SV : ViewBinding> : AppCompatActivity() {
             val method: Method = aClass.getDeclaredMethod("inflate", LayoutInflater::class.java)
             mViewBinding = method.invoke(null, layoutInflater) as SV
         } catch (e: IllegalAccessException) {
-            e.printStackTrace()
+            ALog.e(e)
         } catch (e: InvocationTargetException) {
-            e.printStackTrace()
+            ALog.e(e)
         } catch (e: NoSuchMethodException) {
-            e.printStackTrace()
+            ALog.e(e)
         }
         return mViewBinding.root
     }
 
 
     protected abstract fun initLayout(savedInstanceState: Bundle?)
-
-
-    //1.框架搭建完成
-    //2.调试登录接口
 
 }

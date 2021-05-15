@@ -6,6 +6,8 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.alexe.base.base.BaseActivity
+import com.alexe.base.helper.ALog
+import com.alexe.base.helper.HttpHelper
 import com.alexe.www.databinding.ActivityMainBinding
 import com.alexe.www.http.HttpResult
 import com.alexe.www.ui.InjectorUtil
@@ -34,6 +36,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 }
             }
         })
+
+
+        ALog.i("${HttpHelper.NETWORK_ENABLE}")
     }
 
     companion object {

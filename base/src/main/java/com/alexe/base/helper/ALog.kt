@@ -26,7 +26,7 @@ object ALog {
 
     }
 
-    fun i(tag: String, msg: String) {
+    fun i(msg: String) {
         if (isDebug) {
             Logger.i(msg)
         }
