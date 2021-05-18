@@ -19,16 +19,18 @@ object HttpHelper {
      * 当前网络是否可用
      */
     val NETWORK_ENABLE: Boolean
-        get() {
+        get() = try {
             val manager =
                 mContext!!.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
             val network: Network? = manager.activeNetwork
             val nc: NetworkCapabilities? = manager.getNetworkCapabilities(network)
 
-            return nc != null && (nc.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+            nc != null && (nc.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
                     || nc.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
                     || nc.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET))
+        } catch (e: Exception) {
+            ALog.e(e)
         }
 
 //    val WIFI_AVAILABLE: Boolean

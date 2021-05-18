@@ -38,10 +38,11 @@ object ALog {
         }
     }
 
-    fun e(throwable: Throwable) {
+    fun e(throwable: Throwable): Boolean {
         if (isDebug) {
             Logger.d(throwable)
         }
+        return false
     }
 
     fun w(msg: String) {
