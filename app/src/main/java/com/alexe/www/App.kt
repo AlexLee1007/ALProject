@@ -16,19 +16,19 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        mContext = this
+        context = this
         initialize()
     }
 
     private fun initialize() {
-        AppManager.init(mContext)
-        MmkvUtil.init(mContext)
-        HttpHelper.init(mContext)
+        AppManager.init(context)
+        MmkvUtil.init(context)
+        HttpHelper.init(context)
         ALog.init(BuildConfig.DEBUG, "DOGE")
     }
 
     companion object {
-        lateinit var mContext: App
+        lateinit var context: App
     }
 
 }

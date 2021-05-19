@@ -39,6 +39,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
 
         ALog.i("${HttpHelper.NETWORK_ENABLE}")
+        ALog.i("${HttpHelper.WIFI_AVAILABLE}")
+        ALog.i("${HttpHelper.MAC_ADDRESS}")
     }
 
     companion object {

@@ -3,6 +3,8 @@ package com.alexe.base.helper
 import android.nfc.Tag
 import android.util.Log
 import com.orhanobut.logger.*
+import java.io.PrintWriter
+import java.io.StringWriter
 
 
 /**
@@ -38,11 +40,22 @@ object ALog {
         }
     }
 
-    fun e(throwable: Throwable): Boolean {
+    fun e(throwable: Throwable) {
         if (isDebug) {
-            Logger.d(throwable)
+            val sw = StringWriter()
+            val pw = PrintWriter(sw)
+            val MAX_STACK_TRACE_SIZE = 131071 //128 KB - 1
+            throwable.printStackTrace(pw)
+            var stackTraceStr = sw.toString()
+            if (stackTraceStr.length > MAX_STACK_TRACE_SIZE) {
+                val disclaimer = "[stack trace too large ...]"
+                stackTraceStr = "${stackTraceStr.substring(
+                    0,
+                    MAX_STACK_TRACE_SIZE - disclaimer.length
+                )}${disclaimer}"
+            }
+            Logger.e(stackTraceStr)
         }
-        return false
     }
 
     fun w(msg: String) {

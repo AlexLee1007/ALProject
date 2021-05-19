@@ -26,7 +26,7 @@ object Api {
 
     private val mClient: OkHttpClient
         get() = try {
-            val cacheFile = File(App.mContext.codeCacheDir, "cache")
+            val cacheFile = File(App.context.codeCacheDir, "cache")
             val cache = Cache(cacheFile, 1024 * 1024 * 100)
             val builder = OkHttpClient.Builder()
                 .connectTimeout(Constant.REQUEST_NETWORK_TIME, TimeUnit.MILLISECONDS)
