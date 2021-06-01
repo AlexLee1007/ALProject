@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'android-aspectjx'
 }
 
 def androids = rootProject.ext.androids
@@ -18,16 +19,37 @@ android {
         versionCode androids.versionCode
         versionName androids.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
 
     buildFeatures {
         viewBinding = true
     }
 
+    aspectjx {
+        enabled true
+        // exclude 'androidx', 'com.google', 'com.squareup', 'org.apache', 'com.alipay', 'com.taobao', 'versions.9'
+        include 'com.alexe.www'
+    }
+
     buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    android.applicationVariants.all { variant ->
+        def buildName = 'APP'
+        variant.productFlavors.each { product ->
+            buildName = product.name ?: 'APP'
+        }
+        variant.outputs.all { output ->
+            outputFileName = "${buildName}_${new Date().format("yyyy-MM-dd")}_${variant.buildType.name}.apk"
         }
     }
 
@@ -63,6 +85,7 @@ dependencies {
     implementation libsImpl.google_material
     implementation libsImpl.androidx_constraintLayout
     implementation libsImpl.androidx_recyclerview
+    implementation libsImpl.androidx_multidex
 
     //网络基础依赖
     implementation libsImpl.retrofit_api

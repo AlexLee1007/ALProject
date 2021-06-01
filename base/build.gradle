@@ -48,7 +48,6 @@ dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
 
-
     // Kotlin 基础依赖
     implementation libsImpl.core_ktx
     implementation libsImpl.kotlin_stdlib
@@ -70,7 +69,9 @@ dependencies {
     //第三方依赖库
     implementation libsImpl.mmkv
     implementation libsImpl.logger
+
     api libsImpl.autosize
+    api libsImpl.aspectj
 
     testImplementation libsTestImpl.junit
     androidTestImplementation libsAndroidTestImpl.test_ext

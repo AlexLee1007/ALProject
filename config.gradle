@@ -40,7 +40,7 @@ ext {
             glide                    : '4.11.0',
             smart                    : "2.0.0",
             lifecycle                : '2.2.0',
-            aspectj                  : '1.9.5',
+            aspectj                  : '1.9.6',
             toast                    : '8.2',
             adapter                  : "3.0.4",
             bingoogolapple           : '1.3.7',

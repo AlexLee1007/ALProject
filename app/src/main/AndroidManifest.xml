@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.alexe.www"
-    android:sharedUserId="android.uid.system"
- >
+    package="com.alexe.www">
+
+    <!-- 系统APK需要加入此标签 -->
+    <!-- android:sharedUserId="android.uid.system -->
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
