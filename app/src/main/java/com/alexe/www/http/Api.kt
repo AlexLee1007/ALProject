@@ -3,6 +3,7 @@ package com.alexe.www.http
 import com.alexe.www.App
 import com.alexe.www.BuildConfig
 import com.alexe.www.constant.Constant
+import com.alexe.www.https.HttpLogger
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

@@ -1,4 +1,4 @@
-package com.alexe.www.http
+package com.alexe.www.https
 
 import com.alexe.base.helper.ALog
 import okhttp3.logging.HttpLoggingInterceptor
@@ -100,9 +100,4 @@ class HttpLogger : HttpLoggingInterceptor.Logger {
         }
         return outBuffer.toString()
     }
-
-    companion object {
-        private const val TAG = "HttpLogger"
-    }
-
 }

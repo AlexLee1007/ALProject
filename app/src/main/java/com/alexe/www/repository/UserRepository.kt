@@ -3,11 +3,8 @@ package com.alexe.www.repository
 import com.alexe.base.base.BaseRepository
 import com.alexe.www.http.Api
 import com.alexe.www.http.ApiService
-import com.alexe.www.http.call
-import io.reactivex.disposables.Disposable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.lang.NullPointerException
 
 /**
  * @package: com.alexe.www.ui.main
@@ -18,19 +15,8 @@ import java.lang.NullPointerException
 class UserRepository : BaseRepository() {
 
     suspend fun getTokent(serialId: String) = withContext(Dispatchers.IO) {
-        call {
-            Api.create<ApiService>().getTokent("ANDROID-TERMINAL", serialId)
-        }
+        Api.create<ApiService>().getTokent("ANDROID-TERMINAL", serialId)
     }
-
-    suspend fun getUserName() = withContext(Dispatchers.IO) {
-        "老王"
-    }
-
-    suspend fun getUserSex() = withContext(Dispatchers.IO) {
-        "男"
-    }
-
 
     companion object {
 

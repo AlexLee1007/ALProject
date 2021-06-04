@@ -17,20 +17,22 @@ object ALog {
 
     private var isDebug = false
 
+    private var mTag = ""
+
     fun init(debug: Boolean, tag: String) {
         val strategy: FormatStrategy = PrettyFormatStrategy.newBuilder()
-            .showThreadInfo(false)
-            .methodCount(0)
-            .methodOffset(7)
-            .tag(tag).build()
+                .showThreadInfo(false)
+                .methodCount(0)
+                .methodOffset(7)
+                .tag(tag).build()
         Logger.addLogAdapter(AndroidLogAdapter(strategy))
         isDebug = debug
-
+        mTag = tag
     }
 
     fun i(msg: String) {
         if (isDebug) {
-            Logger.i(msg)
+            Log.i(mTag, msg)
         }
     }
 
@@ -50,8 +52,8 @@ object ALog {
             if (stackTraceStr.length > MAX_STACK_TRACE_SIZE) {
                 val disclaimer = "[stack trace too large ...]"
                 stackTraceStr = "${stackTraceStr.substring(
-                    0,
-                    MAX_STACK_TRACE_SIZE - disclaimer.length
+                        0,
+                        MAX_STACK_TRACE_SIZE - disclaimer.length
                 )}${disclaimer}"
             }
             Logger.e(stackTraceStr)

@@ -31,7 +31,7 @@ class App : Application() {
         AppManager.init(context)
         MmkvUtil.init(context)
         HttpHelper.init(context)
-        ALog.init(BuildConfig.DEBUG, "DOGE")
+        ALog.init(BuildConfig.DEBUG, "Dogecoin")
     }
 
     companion object {

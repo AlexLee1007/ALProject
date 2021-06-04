@@ -1,7 +1,6 @@
 package com.alexe.www.ui.main
 
 import android.os.Bundle
-import android.speech.tts.TextToSpeech
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -27,7 +26,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
         viewModel.text.observe(this, Observer {
             when (it) {
                 is HttpResult.Success -> {
-                    mViewBinding.mainText.text = it.data
+                    it?.let {
+                        mViewBinding.mainText.text = " text : ${it.data}"
+                    }
                 }
                 is HttpResult.Error -> {
                     Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
@@ -37,6 +38,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
                 }
             }
         })
+
         ALog.i("${HttpHelper.NETWORK_ENABLE}")
         ALog.i("${HttpHelper.WIFI_AVAILABLE}")
         ALog.i("${HttpHelper.MAC_ADDRESS}")
