@@ -19,6 +19,14 @@
         android:id="@+id/updateBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp" />
+        android:layout_marginTop="15dp"
+        android:text="获取token" />
+
+    <Button
+        android:id="@+id/infoBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="获取信息" />
 
 </LinearLayout>

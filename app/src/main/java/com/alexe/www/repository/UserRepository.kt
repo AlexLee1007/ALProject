@@ -18,6 +18,11 @@ class UserRepository : BaseRepository() {
         Api.create<ApiService>().getTokent("ANDROID-TERMINAL", serialId)
     }
 
+    suspend fun getDeviceInfo() = withContext(Dispatchers.IO) {
+        Api.create<ApiService>().getDeviceInfo("ANDROID-TERMINAL",
+                "iaZvMs74x\\/r19FwhbEuJaTBppiWVmRAxoV0zUGjDEiFzHxtWE09RTFdOjM4ci0xzt0pqcT+nIWBKLzGL39iSXyR1TwAglxSAj7\\/f6RvNun9lKBgOnPMkeklA4km6j3iaRJh+NScuqMZQKhdNFaTt\\/5RK2R63BRaiBPz++r9LlzI/=SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSE")
+    }
+
     companion object {
 
         private var instance: UserRepository? = null;

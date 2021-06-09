@@ -1,7 +1,6 @@
-package com.alexe.www.https
+package com.alexe.www.http
 
 import com.alexe.base.helper.ALog
-import com.alexe.www.https.NetException
 import com.google.gson.JsonParseException
 import kotlinx.coroutines.CoroutineExceptionHandler
 import org.json.JSONException

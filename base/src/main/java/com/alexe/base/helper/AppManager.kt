@@ -18,10 +18,12 @@ object AppManager : Application.ActivityLifecycleCallbacks {
     var application: Application? = null
         private set
 
+
     fun init(application: Application) {
         this.application = application
         application.registerActivityLifecycleCallbacks(this)
     }
+
 
     /**
      *  获取栈顶的Activity
@@ -31,15 +33,48 @@ object AppManager : Application.ActivityLifecycleCallbacks {
 
 
     /**
+     * 销毁所有的Activity,保留指定的Activity
+     */
+    fun finishOtherActivites(vararg classArray: Class<out Activity>?) {
+        activityStack.removeAll { set ->
+            if (!set.isFinishing) {
+                if (classArray.contains(set.javaClass)) {
+                    true
+                } else {
+                    set.finish()
+                    false
+                }
+            } else {
+                true
+            }
+        }
+    }
+
+
+    /**
+     *  销毁指定的Activity
+     */
+    @SafeVarargs
+    fun finishActivites(vararg classArray: Class<out Activity>?) {
+        activityStack.removeAll { set ->
+            if (!set.isFinishing) {
+                if (classArray.contains(set.javaClass)) {
+                    set.finish()
+                    true
+                } else {
+                    false
+                }
+            } else {
+                true
+            }
+        }
+    }
+
+    /**
      *  清空画面栈，退出程序
      */
-    fun finishAllActivity() {
-        while (true) {
-            if (activityStack.isEmpty()) {
-                break
-            }
-            topActivity.finish()
-        }
+    fun exitApp() {
+        finishOtherActivites()
         android.os.Process.killProcess(android.os.Process.myPid())
         System.exit(0)
     }

@@ -4,6 +4,7 @@ import com.alexe.www.App
 import com.alexe.www.BuildConfig
 import com.alexe.www.constant.Constant
 import com.alexe.www.https.HttpLogger
+import com.alexe.www.https.TokenInterceptor
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -30,16 +31,17 @@ object Api {
             val cacheFile = File(App.context.codeCacheDir, "cache")
             val cache = Cache(cacheFile, 1024 * 1024 * 100)
             val builder = OkHttpClient.Builder()
-                .connectTimeout(Constant.REQUEST_NETWORK_TIME, TimeUnit.MILLISECONDS)
-                .readTimeout(Constant.READ_NETWORK_TIME, TimeUnit.MILLISECONDS)
-                .writeTimeout(Constant.WRITE_NETWORK_TIME, TimeUnit.MILLISECONDS)
-                .cache(cache)
-                .addInterceptor(
-                    if (BuildConfig.DEBUG)
-                        HttpLoggingInterceptor(HttpLogger()).setLevel(HttpLoggingInterceptor.Level.BODY)
-                    else
-                        HttpLoggingInterceptor(HttpLogger()).setLevel(HttpLoggingInterceptor.Level.NONE)
-                )
+                    .connectTimeout(Constant.REQUEST_NETWORK_TIME, TimeUnit.MILLISECONDS)
+                    .readTimeout(Constant.READ_NETWORK_TIME, TimeUnit.MILLISECONDS)
+                    .writeTimeout(Constant.WRITE_NETWORK_TIME, TimeUnit.MILLISECONDS)
+                    .cache(cache)
+                    .addInterceptor(TokenInterceptor())
+                    .addInterceptor(
+                            if (BuildConfig.DEBUG)
+                                HttpLoggingInterceptor(HttpLogger()).setLevel(HttpLoggingInterceptor.Level.BODY)
+                            else
+                                HttpLoggingInterceptor(HttpLogger()).setLevel(HttpLoggingInterceptor.Level.NONE)
+                    )
             builder.build()
         } catch (e: Exception) {
             throw RuntimeException()
@@ -48,12 +50,12 @@ object Api {
 
     private val mRetrofit: Retrofit by lazy {
         val retrofit = Retrofit.Builder()
-            .baseUrl(Constant.HTTP_REQUET_IP)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .addConverterFactory(ScalarsConverterFactory.create())
-            .client(mClient)
-            .build()
+                .baseUrl(Constant.HTTP_REQUET_IP)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .client(mClient)
+                .build()
         return@lazy retrofit
     }
 

@@ -1,4 +1,4 @@
-package com.alexe.www.https
+package com.alexe.www.http
 
 import com.alexe.www.App
 import com.alexe.www.R

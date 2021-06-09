@@ -23,6 +23,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
 
     override fun initLayout(savedInstanceState: Bundle?) {
         mViewBinding.updateBtn.setOnClickListener(this)
+        mViewBinding.infoBtn.setOnClickListener(this)
         viewModel.text.observe(this, Observer {
             when (it) {
                 is HttpResult.Success -> {
@@ -48,6 +49,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.updateBtn -> viewModel.getTokent("s")
+            R.id.infoBtn -> viewModel.getDeviceInfo()
             else -> {
             }
         }

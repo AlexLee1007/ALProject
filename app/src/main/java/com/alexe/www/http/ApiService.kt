@@ -1,5 +1,6 @@
 package com.alexe.www.http
 
+import com.alexe.www.entity.DeviceEntity
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query
@@ -12,12 +13,17 @@ import retrofit2.http.Query
  */
 interface ApiService {
 
-
     @GET("/api/biz/device/terminals/mac")
     suspend fun getTokent(
-        @Header("System") system: String,
-        @Query("mac") serialId: String
+            @Header("System") system: String,
+            @Query("mac") serialId: String
     ): IBaseResponse<String>
 
+
+    @GET("/api/biz/device/terminals/info")
+    suspend fun getDeviceInfo(
+            @Header("System") system: String,
+            @Header("Authorization") auth: String
+    ): IBaseResponse<DeviceEntity>
 
 }

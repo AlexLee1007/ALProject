@@ -3,8 +3,9 @@ package com.alexe.www.ui.main
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.alexe.base.helper.ALog
 import com.alexe.www.http.HttpResult
-import com.alexe.www.https.call
+import com.alexe.www.http.call
 import com.alexe.www.repository.UserRepository
 import kotlinx.coroutines.*
 
@@ -25,6 +26,13 @@ class MainViewModel(private val userRepository: UserRepository) : ViewModel() {
         viewModelScope.launch(call { code, message -> text.value = HttpResult.Error(code = code, message = message) }) {
             val value = userRepository.getTokent(serialId)
             text.value = HttpResult.Success(value.data)
+        }
+    }
+
+    fun getDeviceInfo() {
+        viewModelScope.launch(call { code, message -> text.value = HttpResult.Error(code = code, message = message) }) {
+            val value = userRepository.getDeviceInfo()
+            text.value = HttpResult.Success(value.data?.name)
         }
     }
 
