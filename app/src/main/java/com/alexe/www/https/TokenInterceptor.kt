@@ -51,7 +51,7 @@ class TokenInterceptor : Interceptor {
     }
 
     private fun onJumpLoginView() {
-        val intent = Intent("${BuildConfig.APPLICATION_ID}.login")
+        val intent = Intent(App.context, LoginActivity::class.java)
         AppManager.startActivity(intent)
         AppManager.finishOtherActivites(LoginActivity::class.java)
     }

@@ -33,12 +33,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.login.LoginActivity">
-            <intent-filter>
-                <action android:name="${applicationId}.login" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ui.login.LoginActivity"/>
 
     </application>
 
