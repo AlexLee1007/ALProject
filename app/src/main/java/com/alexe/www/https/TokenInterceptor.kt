@@ -6,6 +6,7 @@ import com.alexe.base.helper.ALog
 import com.alexe.base.helper.AppManager
 import com.alexe.base.helper.MmkvUtil
 import com.alexe.www.App
+import com.alexe.www.BuildConfig
 import com.alexe.www.ui.login.LoginActivity
 import okhttp3.*
 import org.json.JSONObject
@@ -32,8 +33,7 @@ class TokenInterceptor : Interceptor {
             if (TextUtils.isEmpty(newToken)) {
                 ALog.d("Token Expired : Jump Login...")
                 //#TODO 使用拦截器时这里需要设置跳转登录页
-                App.context.startActivity(Intent(App.context, LoginActivity::class.java))
-                AppManager.finishOtherActivites(LoginActivity::class.java)
+                onJumpLoginView()
             } else {
                 ALog.d("Token Expired : Refresh Token...")
                 val newRequest: Request = chain.request()
@@ -50,6 +50,11 @@ class TokenInterceptor : Interceptor {
         throw IllegalArgumentException("------> Response Body is NULL")
     }
 
+    private fun onJumpLoginView() {
+        val intent = Intent("${BuildConfig.APPLICATION_ID}.login")
+        AppManager.startActivity(intent)
+        AppManager.finishOtherActivites(LoginActivity::class.java)
+    }
 
     /**
      * 判断Token是否失效
@@ -68,6 +73,8 @@ class TokenInterceptor : Interceptor {
 
     /**
      * 重新获取Token
+     * 根据接口要求修改,使用同步请求
+     *
      */
     private fun getNewToken(): String {
         return ""

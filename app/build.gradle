@@ -29,7 +29,7 @@ android {
     aspectjx {
         enabled true
         // exclude 'androidx', 'com.google', 'com.squareup', 'org.apache', 'com.alipay', 'com.taobao', 'versions.9'
-        include 'com.alexe.www'
+        include app.applicationId
     }
 
     buildTypes {

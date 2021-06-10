@@ -13,6 +13,7 @@ import com.alexe.www.aop.SingleClick
 import com.alexe.www.databinding.ActivityMainBinding
 import com.alexe.www.http.HttpResult
 import com.alexe.www.ui.InjectorUtil
+import java.lang.Exception
 
 
 class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
@@ -43,6 +44,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
         ALog.i("${HttpHelper.NETWORK_ENABLE}")
         ALog.i("${HttpHelper.WIFI_AVAILABLE}")
         ALog.i("${HttpHelper.MAC_ADDRESS}")
+
+        try {
+            throw NullPointerException("");
+        } catch (e: Exception) {
+            ALog.e(e)
+        }
+
     }
 
     @SingleClick

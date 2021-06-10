@@ -2,6 +2,7 @@ package com.alexe.base.helper
 
 import android.app.Activity
 import android.app.Application
+import android.content.Intent
 import android.os.Bundle
 import java.util.*
 
@@ -31,6 +32,12 @@ object AppManager : Application.ActivityLifecycleCallbacks {
     val topActivity: Activity
         get() = activityStack.lastElement()
 
+    /**
+     * 启动Activity
+     */
+    fun startActivity(intent: Intent) {
+        application!!.startActivity(intent)
+    }
 
     /**
      * 销毁所有的Activity,保留指定的Activity
